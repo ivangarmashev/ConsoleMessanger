@@ -6,7 +6,7 @@ namespace ConsoleMessanger
     {
         static void Main(string[] args)
         {
-            Message msg = new Message("User1", "Text1", DateTime.Today);
+            var msg = new Message("User1", "Text1", DateTime.Today);
             Console.WriteLine("Start..");
             Console.WriteLine(msg.ToString());
         }

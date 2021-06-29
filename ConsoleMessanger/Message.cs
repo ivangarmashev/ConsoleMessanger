@@ -24,7 +24,7 @@ namespace ConsoleMessanger
 
         public override string ToString()
         {
-            string output = String.Format($"{UserName} <{TimeStamp}>: {MessageText}");
+            var output = string.Format($"{UserName} <{TimeStamp}>: {MessageText}");
             return output;
         }
     }
