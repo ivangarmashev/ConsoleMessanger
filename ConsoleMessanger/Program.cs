@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace ConsoleMessanger
 {
@@ -6,9 +7,13 @@ namespace ConsoleMessanger
     {
         static void Main(string[] args)
         {
-            var msg = new Message("User1", "Text1", DateTime.Today);
+            var msg = new Message();
             Console.WriteLine("Start..");
-            Console.WriteLine(msg.ToString());
+            string output = JsonConvert.SerializeObject(msg);
+            Console.WriteLine(output);
+            Message deserilizedMessage = JsonConvert.DeserializeObject<Message>(output);
+            Console.WriteLine(deserilizedMessage);
+            // Console.WriteLine(msg.ToString());
         }
     }
 }
