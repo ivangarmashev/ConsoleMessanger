@@ -2,6 +2,7 @@ using System;
 
 namespace ConsoleMessanger
 {
+    [Serializable]
     public class Message
     {
         public string UserName { get; set; }
