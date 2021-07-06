@@ -36,7 +36,7 @@ namespace ConsoleMessanger
             {
                 GetNewMessages();
                 messageText = Console.ReadLine();
-                if (messageText.Length > 1)
+                if (messageText.Length > 0)
                 {
                     Message sendMessage = new Message(username, messageText, DateTime.Now);
                     Api.SendMessage(sendMessage);
