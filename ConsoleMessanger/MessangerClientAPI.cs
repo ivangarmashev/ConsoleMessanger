@@ -12,31 +12,34 @@ namespace ConsoleMessanger
         {
             Message message = new Message();
             string output = JsonConvert.SerializeObject(message);
-            Console.WriteLine(output);
+            // Console.WriteLine(output);
             Message deserializedMessage = JsonConvert.DeserializeObject<Message>(output);
-            Console.WriteLine(deserializedMessage);
+            // Console.WriteLine(deserializedMessage);
         }
 
         public Message GetMessage(int messageId)
         {
             WebRequest request = WebRequest.Create("http://localhost:5000/api/Messenger/" + messageId);
-            request.Method = "Get";
+            request.Method = "GET";
             WebResponse response = request.GetResponse();
-            string status = ((HttpWebResponse) response).StatusDescription;
-            Console.WriteLine(status);
+            string status = ((HttpWebResponse)response).StatusDescription;
+            // Console.WriteLine(status);
             Stream dataStream = response.GetResponseStream();
             StreamReader reader = new StreamReader(dataStream);
             string responseFromServer = reader.ReadToEnd();
-            Console.WriteLine(responseFromServer);
+            // Console.WriteLine(responseFromServer);
             reader.Close();
             dataStream.Close();
-            if (status.ToLower() == "ok" && responseFromServer != "Not found")
+            response.Close();
+            if ((status == "OK") && (responseFromServer != "Not found"))
             {
                 Message deserializedMessage = JsonConvert.DeserializeObject<Message>(responseFromServer);
                 Console.WriteLine(deserializedMessage);
+                // Console.WriteLine("deseralizedmsg, then return");
                 return deserializedMessage;
             }
 
+            // Console.WriteLine("return null");
             return null;
         }
 
@@ -52,7 +55,7 @@ namespace ConsoleMessanger
             dataStream.Write(byteArray, 0, byteArray.Length);
             dataStream.Close();
             WebResponse response = request.GetResponse();
-            Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+            // Console.WriteLine(((HttpWebResponse)response).StatusDescription);
             dataStream = response.GetResponseStream();
             StreamReader reader = new StreamReader(dataStream);
             string responsеFromServer = reader.ReadToEnd();

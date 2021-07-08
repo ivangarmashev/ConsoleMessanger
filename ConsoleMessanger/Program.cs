@@ -7,16 +7,20 @@ namespace ConsoleMessanger
     {
         private static int messageId;
         private static string username;
-        private static MessangerClientAPI Api = new MessangerClientAPI();
+        private static MessangerClientAPI API = new MessangerClientAPI();
 
         private static void GetNewMessages()
         {
-            Message message = Api.GetMessage(messageId);
-            while (message != null){}
+            Message message = API.GetMessage(messageId);
+            // Console.WriteLine(message);
+            
+            while (message != null)
             {
-                Console.WriteLine(message);
+                // Console.WriteLine(message);
                 messageId++;
-                message = Api.GetMessage(messageId);
+                // Console.WriteLine(messageId);
+                message = API.GetMessage(messageId);
+                // Console.WriteLine("end of getMessage");
             }
             
         }
@@ -34,12 +38,17 @@ namespace ConsoleMessanger
             string messageText = "";
             while (messageText != "exit")
             {
+                // Console.WriteLine("цикл while");
                 GetNewMessages();
+                Console.WriteLine("Введите сообщение:");
                 messageText = Console.ReadLine();
-                if (messageText.Length > 0)
+                if (messageText.Length > 1)
                 {
+                    
+                    // Console.WriteLine("цикл if");
                     Message sendMessage = new Message(username, messageText, DateTime.Now);
-                    Api.SendMessage(sendMessage);
+                    API.SendMessage(sendMessage);
+                    messageText = "";
                 }
             }
         }
